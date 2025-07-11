@@ -1,7 +1,22 @@
 {
   "name": "json-mafia",
   "version": "1.0.0",
+  "description": "Mafia-style blog-based card game using GitHub + Netlify functions",
+  "main": "netlify/functions/trigger-mission.js",
+  "type": "module",
+  "scripts": {
+    "start": "netlify dev"
+  },
   "dependencies": {
     "@octokit/core": "^5.0.0"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [
+    "mafia",
+    "json",
+    "netlify",
+    "game",
+    "github"
+  ],
+  "license": "MIT"
 }
