@@ -1,1 +1,22 @@
+{
+  "id": "player001",
+  "name": "Johnny Drip",
+  "faction": "Street Lords",
+  "level": 1,
+  "xp": 0,
+  "cash": 500,
+  "health": 100,
+  "stamina": 10,
+  "last_action": "2025-07-10T22:10:00Z",
+  "inventory": [
+    "spray_can",
+    "brass_knuckles"
+  ],
+  "history": [
+    {
+      "date": "2025-07-10",
+      "event": "Character created."
+    }
+  ]
+}
 
