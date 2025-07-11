@@ -1,0 +1,59 @@
+name: Update Player via Webhook
+
+on:
+  repository_dispatch:
+    types: [mission-run]
+
+jobs:
+  update-player:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: .github/actions
+        continue-on-error: true
+
+      - name: Run Update Script
+        env:
+          PLAYER_ID: ${{ github.event.client_payload.player_id }}
+          ACTION: ${{ github.event.client_payload.action }}
+        run: |
+          echo "Running mission for $PLAYER_ID with action $ACTION"
+
+          FILE="players/$PLAYER_ID.json"
+
+          if [ ! -f "$FILE" ]; then
+            echo "Player file not found: $FILE"
+            exit 1
+          fi
+
+          # Read and modify JSON
+          cat $FILE | jq \
+            --argjson mission "$(cat missions.json | jq -r ".[$ACTION]")" \
+            --arg date "$(date -Iseconds)" \
+            '
+            .xp += $mission.xp | 
+            .cash += $mission.cash | 
+            .health -= $mission.health | 
+            .stamina -= $mission.stamina | 
+            .last_action = $date | 
+            .history += [{ date: $date, event: $mission.log }]'
+          > tmp.json
+
+          mv tmp.json "$FILE"
+
+      - name: Commit Changes
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "actions@github.com"
+          git add players/${{ env.PLAYER_ID }}.json
+          git commit -m "Mission run: ${{ env.ACTION }} by ${{ env.PLAYER_ID }}"
+          git push
