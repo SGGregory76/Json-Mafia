@@ -1,0 +1,60 @@
+name: Update Player JSON
+
+on:
+  push:
+    paths:
+      - 'submissions/*.json'
+
+jobs:
+  update-player:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install fs path
+
+      - name: Run Update Script
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const submissionFiles = fs.readdirSync('./submissions').filter(file => file.endsWith('.json'));
+          const missions = JSON.parse(fs.readFileSync('./missions.json'));
+
+          submissionFiles.forEach(file => {
+            const submissionPath = path.join('./submissions', file);
+            const action = JSON.parse(fs.readFileSync(submissionPath));
+
+            const mission = missions.find(m => m.id === action.action);
+            if (!mission) return;
+
+            const playerPath = path.join('./players', `${action.player_id}.json`);
+            if (!fs.existsSync(playerPath)) return;
+
+            const player = JSON.parse(fs.readFileSync(playerPath));
+            player.xp += mission.xp_gain;
+            player.cash += mission.cash_gain;
+            player.health -= mission.health_cost;
+            player.stamina -= mission.stamina_cost;
+            player.last_action = action.submitted_at;
+            player.history.push({ date: action.submitted_at, event: mission.log });
+
+            fs.writeFileSync(playerPath, JSON.stringify(player, null, 2));
+          });
+          EOF
+
+      - name: Commit Changes
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'actions@github.com'
+          git add players/*.json
+          git commit -m 'Updated player stats from actions' || echo "No changes"
+          git push
