@@ -1,0 +1,29 @@
+[
+  {
+    "id": "spray_tag",
+    "name": "Spray Tag Mission",
+    "xp_gain": 10,
+    "cash_gain": 50,
+    "health_cost": 0,
+    "stamina_cost": 2,
+    "log": "Tagged an enemy wall in turf war."
+  },
+  {
+    "id": "get_cash",
+    "name": "Shady Delivery",
+    "xp_gain": 5,
+    "cash_gain": 100,
+    "health_cost": 0,
+    "stamina_cost": 3,
+    "log": "Delivered a mysterious envelope downtown."
+  },
+  {
+    "id": "fight_back",
+    "name": "Street Fight",
+    "xp_gain": 20,
+    "cash_gain": 30,
+    "health_cost": 10,
+    "stamina_cost": 5,
+    "log": "Fought back against a rival crew."
+  }
+]
