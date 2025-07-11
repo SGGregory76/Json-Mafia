@@ -1,0 +1,83 @@
+{
+  "jobs": [
+    {
+      "id": "spray_tag",
+      "name": "Spray Tag",
+      "description": "Tag a rival gang’s mural with your crew logo.",
+      "stamina_cost": 3,
+      "requirements": {
+        "level": 1
+      },
+      "rewards": {
+        "xp": 5,
+        "cash": 120,
+        "loot": ["spray_can"]
+      },
+      "log": "Tagged the Eastside Crew wall. Turf wars heating up."
+    },
+    {
+      "id": "shoplift",
+      "name": "Shoplift",
+      "description": "Swipe electronics from a corner store. Quick and dirty.",
+      "stamina_cost": 4,
+      "requirements": {
+        "level": 2
+      },
+      "rewards": {
+        "xp": 8,
+        "cash": 180,
+        "loot": ["cheap_phone"]
+      },
+      "log": "You pocketed two burners and got out clean."
+    },
+    {
+      "id": "collect_protection",
+      "name": "Collect Protection",
+      "description": "Strong-arm a local merchant for protection money.",
+      "stamina_cost": 5,
+      "requirements": {
+        "level": 3,
+        "connections": 1
+      },
+      "rewards": {
+        "xp": 12,
+        "cash": 250,
+        "loot": []
+      },
+      "log": "Merchant coughed up fast. You're feared."
+    },
+    {
+      "id": "getaway_driver",
+      "name": "Getaway Driver",
+      "description": "Drive for a jewelry store heist crew.",
+      "stamina_cost": 6,
+      "requirements": {
+        "level": 4,
+        "smarts": 2
+      },
+      "rewards": {
+        "xp": 14,
+        "cash": 400,
+        "loot": ["blueprints", "radio_scanner"]
+      },
+      "log": "Flawless escape. No cops. You're reliable muscle now."
+    },
+    {
+      "id": "bribe_councilman",
+      "name": "Bribe Councilman",
+      "description": "Use cash and charm to pull some political strings.",
+      "stamina_cost": 7,
+      "requirements": {
+        "level": 5,
+        "connections": 3,
+        "smarts": 3
+      },
+      "rewards": {
+        "xp": 20,
+        "cash": -200,
+        "loot": ["favor"]
+      },
+      "log": "He smiled and took the cash. Expect a favor soon."
+    }
+  ]
+}
