@@ -9,5 +9,7 @@
     "attack": 91,
     "defense": 85
   },
-  "adopted": false
+  "adopted": false,
+  "adopted_on": "",
+  "owner": ""
 }
