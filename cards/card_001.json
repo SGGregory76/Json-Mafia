@@ -1,0 +1,13 @@
+{
+  "id": "card_001",
+  "name": "Street Enforcer",
+  "frame": "carbon_foil",
+  "image": "card_001.png",
+  "stats": {
+    "health": 88,
+    "energy": 73,
+    "attack": 91,
+    "defense": 85
+  },
+  "adopted": false
+}
